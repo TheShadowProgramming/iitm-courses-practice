@@ -1,3 +1,4 @@
-#### genAI learning repo
+# iitm-courses practice code and some notes folder-wise
 
-// random changes to test something, this is another experiment
+- Usually Diploma subjects and degree subjects and not foundational ones, they're in notion
+- message on socials for those notion notes (first principles based)
