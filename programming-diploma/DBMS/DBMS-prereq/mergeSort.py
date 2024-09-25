@@ -1,22 +1,45 @@
-# Notes of merge Sort :- 
+def mergeInSortedManner (left, right):
 
-'''
-    we divide the entire array in half pieces recursively till we get arrays with only 2 members
-    then we sort the arrays of length 2 linearly and add the arrays recursively, and then sort the newlyformed array again
-'''
+    i, j = 0, 0;
+    mergedSortedArray = [];
 
-unsortedArray = input('enter the unsorted array in form of string here');
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            mergedSortedArray.append(left[i]);
+            i += 1;
+        else:
+            mergedSortedArray.append(right[j]);
+            j += 1;
 
-def sortTwoElements(array):
-    if (array[0] < array[1]) or (array[0] == array[1]):
-        return array;
-    elif array[0] > array[1]: # works for numbers only, well this sorting algorithm only makes sense under the sorting context
-        array[0] = array[0] + array[1];
-        array[1] = array[0] - array[1];
-        array[0] = array[0] - array[1];
+    while i < len(left):
+        mergedSortedArray.append(left[i]);
+        i += 1;
+
+    while j < len(right):
+        mergedSortedArray.append(right[j])
+        j += 1;
+
+    return mergedSortedArray;
 
 def mergeSort (unsortedArray):
-    if len(unsortedArray) == 2:
-        return sortTwoElements(unsortedArray)
-    middleIndex = len(unsortedArray) // 2
-    return None;
+
+    if len(unsortedArray) == 1:
+        return unsortedArray; # already sorted
+
+    middle = len(unsortedArray) // 2;
+    firstHalf = unsortedArray[:middle];
+    secondHalf = unsortedArray[middle:];
+
+    firstBrokenHalf = mergeSort(firstHalf);
+    secondBrokenHalf = mergeSort(secondHalf);
+
+    return mergeInSortedManner(firstBrokenHalf, secondBrokenHalf);
+
+strUnsortedArray = input("Enter the stringified array here:").split(",");
+unsortedArray = []
+i = 0;
+while i < len(strUnsortedArray):
+    unsortedArray.append(int(strUnsortedArray[i]))
+    i += 1;
+
+print(mergeSort(unsortedArray));
