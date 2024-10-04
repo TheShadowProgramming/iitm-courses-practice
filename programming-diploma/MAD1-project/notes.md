@@ -1,7 +1,15 @@
 # Installation of flask
 
 - we only have pip command for the installation of the flask project
-- so therefore pip install flask
+- so therefore create a virtual environment first then
+- install flask there
+
+for venv :- 
+
+run this command in the directory in which we want to install the virtual environment
+- python3 -m venv .venv
+- . .venv/bin/activate (for activating the virtual environment)
+- deactivate karne ke liye, just the deactivate keyword
 
 # Thing about the virtual environment
 
