@@ -38,3 +38,6 @@ run this command in the directory in which we want to install the virtual enviro
 
 - so like flask has a mechanism of redirecting simlar urls to their proper places so that browsers don't consider these different urls as different pages which decreases the SEO of these pages
 - project like url ko '/project/' bana deta and file like url ko normal 'file/' type url bana deta
+
+### url for method
+- url-method can do this that kisi ek function jo ek specific route ke liye defined hai uska url dhundhne ke liye if we pass the name of the function inside the url-for method then we'll get that 

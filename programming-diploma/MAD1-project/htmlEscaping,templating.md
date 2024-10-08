@@ -10,6 +10,7 @@ def hello(name):
 - like the user can even pass script tag in the url to make use of the script tag so that he can manipulate the actions of the website in his browser
 - therefore escape method is used
 - and the <name> is stored as variable which takes the value that is passed by the user after the / in the url 
+- for more such cybersec practices in a real world project we can read the docs when we have a project in our hand
 
 # Using variables in return statement
 
