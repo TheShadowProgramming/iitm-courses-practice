@@ -34,10 +34,23 @@ run this command in the directory in which we want to install the virtual enviro
 - we can even set environment variables like export FLASK_APP=app.py (in the directory of app.py ofc)
 - In this way flask understands by itself, like jo .env file me bhi store kar sakte and like iss tarah se bhi in built package environment variables ko bhi set kar sakte hai
 
-# FLask's url re-direction behavior
+# Jinja2 Template
 
-- so like flask has a mechanism of redirecting simlar urls to their proper places so that browsers don't consider these different urls as different pages which decreases the SEO of these pages
-- project like url ko '/project/' bana deta and file like url ko normal 'file/' type url bana deta
+- In jinja we can write variables inside {{}} and statements like if, for loops and stuff in {%%} blocks 
+- and for comments we use this {##}, renaming the template html files into .html.jinja will help the IDEs classify them better 
+- every code block has to be mandatorily closed like endif, endfor, endblock etc.
 
-### url for method
-- url-method can do this that kisi ek function jo ek specific route ke liye defined hai uska url dhundhne ke liye if we pass the name of the function inside the url-for method then we'll get that 
+# Template Inheritance and url_for method 
+
+- So like yea flask or jinja is not like react where we're having single page website and then everything is getting manipulated using virtual DOM and stuff
+- In flask like frameworks we send separate html files for every request and path that exists on the website, and as a result we have to write the html boilerplate code everytime we create some new jinja template
+- Now the thing is we can create some layouts and then use "block" keywords where new code will be added when we write "extends name_of_parent.html" at the top of our child html file 
+
+# Static folder and stuff + Template Inheritance
+
+- we should include all the css and js files in static folder by default since that is the structure of the 
+- Through Template Inheritance we can bring the similar effects that classes and objects have in progamming 
+- Sort of OOP type approach in frontEnd
+- We're using bootstrap to style our website which is developed using flask, and we'll use cdn to link our css files
+- So like cdn which is content delivery network which hosts remote files on their server and when we link these files directly in our html file then our html files extracts the styles and remote js from the server
+- So like there's a drawback to this approach since we're depending on some external package for our code
