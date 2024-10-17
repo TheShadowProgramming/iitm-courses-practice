@@ -1,45 +1,94 @@
 <!DOCTYPE html>
+
+<!-- I have used some bootstrap classes and data attributes for the elements, the stuff which is self-explanatory is not explained and the rest less obvious is explained. -->
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    {% block cssFile %}
-        {# child links their css file here #}
-    {% endblock cssFile %}
-    {% block additional-head-tag-content %}
-        {# Some additional head-tag content here #}
-    {% endblock additional-head-tag-content %}
-    {% if title %}
-        <title>Flask Blog - {{title}}</title>
-        {# title is passed in app.py as a prop #}
-    {% endif title %}    
-</head>
-<body>
-    <nav>
-        <div>
-            {{self.title()}} 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    {% block cssFile %} {# child links their css file here #} {% endblock
+    cssFile %} {% block additional-head-tag-content %} {# Some additional
+    head-tag content here #} {% endblock additional-head-tag-content %} {% if
+    title %}
+    <title>Flask Blog - {{title}}</title>
+    {# title is passed in app.py as a prop #} {% endif title %}
+  </head>
+  <body>
+    <header id="navbarToggle" class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <!-- navbar-expand-md will make sure that the navbar has hamburger for links before medium breakpoint, and then proper links after it -->
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">
+            Flask Blog - {{self.title()}}
             <!-- by calling the block's names we can import the same code written for title block in child component for this div tag too -->
-             {# Since using same blocked names in a single html file is not allowed #}
+            {# Since using same blocked names in a single html file is not
+            allowed #}
+          </a>
+          <button
+            class="navbar-toggler" 
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggle"
+            aria-controls="navbarToggle"
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+          >
+            {# Here the type attribute that the button has is standard in html and has many possible values like submit, checkbox, radio, etc. #}
+            {# These different values of type attribute can help us to make certain funcrion of the button clear for semantics, for enhanced user experience #}
+            {# data-toggle = collapse se the content for the target collapses #}
+            {# aria-controls is for accesibility and semantics and describe which element is getting controlled by this button for the accesibility softwares, the render engine doesn't want knowledge what it does control since it already knows this #}
+            {# aria expanded is default expansion value, and label is for text for screen readers #}
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="/">Home</a>
+              <a class="nav-item nav-link" href="/about">About</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/register">Register</a>
+            </div>
+          </div>
         </div>
-        {% block content-nav %}
-            {# content navbar here #}
-        {% endblock content-nav %}
-    </nav>
+      </nav>
+    </header>
     <main>
-        {% block content-main %}
-            {# content-of-the-web-page #}
-        {% endblock content-main %}
+      {% block content-main %} {# content-of-the-web-page #} {% endblock
+      content-main %}
     </main>
     <footer>
-        {% block content-footer %}
-            {# content's-footer-and-also-include-address-tag-for-semantics #}
-        {% endblock content-footer %}
+      {% block content-footer %} {#
+      content's-footer-and-also-include-address-tag-for-semantics #} {% endblock
+      content-footer %}
     </footer>
-    {# It is generally a good practice to include the name of the block in the enblock statement #}
-    {# we can even add some content here only which is getting repeated in the template files #}
-    {# Then use {{ super() }} to render the content which is present in the parent file #}
-    {# {{ super.super() }} inside a child component will render the grandparent file's content #}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    {# It is generally a good practice to include the name of the block in the
+    enblock statement #} {# we can even add some content here only which is
+    getting repeated in the template files #} {# Then use {{ super() }} to
+    render the content which is present in the parent file #} {# {{
+    super.super() }} inside a child component will render the grandparent file's
+    content #}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
