@@ -8,7 +8,11 @@ app = Flask(__name__);
 
 @app.get("/")
 def home():
-    return render_template('jinja-templates/components/home.html', title='home') # here title is the prop that we're passing in the template
+    return render_template('./templates/home.html', title='Home') # here title is the prop that we're passing in the template
+
+@app.get("/login")
+def login():
+    return render_template('./templates/login.html', title="Login")
 
 @app.route("/checking-escape/<string:name>") # In this way, we can add multiple routes where we want the same function to respond with , <> me string converter hai jiske wajah se the input provided by the user is converted into a string automatically
 def hello_world(name): # function ke argument me query parameters of path must be passed

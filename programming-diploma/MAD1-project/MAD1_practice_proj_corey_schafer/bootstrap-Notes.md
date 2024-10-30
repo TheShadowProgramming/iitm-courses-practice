@@ -60,3 +60,27 @@
     <div class="col col-lg-2">
       3 of 3
     </div>
+
+# Navbar tutorial 
+
+<header class="site-header"> 
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top"> (navbar setups a responsive navbar element, navbar-expand-md class makes sure that the navbar expands when the screen size reaches md, navbar-dark class ensures that the text names inside the navbar element is light for the dark background of the navbar, bg-steel and fixed-top are self-explanatory)
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Flask Blog</a> (images inside this navbar-brand-class anchor tag is automatically vertically aligned and made responsive)
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation"> (these aria attributes are for the accesibility reasons)
+        <span class="navbar-toggler-icon"></span> (hamburger icon aayega yaha pe)
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle"> (ye id automatically collapse hojata using js using the button above)
+        <div class="navbar-nav mr-auto"> (navbar-nav me links aate hai navbar ke)
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

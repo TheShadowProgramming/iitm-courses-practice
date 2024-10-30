@@ -12,12 +12,22 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    {% block cssFile %} {# child links their css file here #} {% endblock
-    cssFile %} {% block additional-head-tag-content %} {# Some additional
-    head-tag content here #} {% endblock additional-head-tag-content %} {% if
-    title %}
-    <title>Flask Blog - {{title}}</title>
-    {# title is passed in app.py as a prop #} {% endif title %}
+
+    {% block cssFile %} 
+    {# child links their css file here #} 
+    {% endblock cssFile %}
+
+    {% block additional-head-tag-content %} 
+    {# Some additional head-tag content here #} 
+    {% endblock additional-head-tag-content %} 
+    
+    {% if title %}
+      <title>Flask Blog - {{title}}</title>
+    {# title is passed in app.py as a prop #} 
+    {% else %}
+      <title> Flask Blog - Page </title>
+    {% endif %} {# we can't use the name of the variable in the endif closing tag #}
+    
   </head>
   <body>
     <header id="navbarToggle" class="site-header">
@@ -25,31 +35,36 @@
         <!-- navbar-expand-md will make sure that the navbar has hamburger for links before medium breakpoint, and then proper links after it -->
         <div class="container">
           <a class="navbar-brand mr-4" href="/">
-            Flask Blog - {{self.title()}}
-            <!-- by calling the block's names we can import the same code written for title block in child component for this div tag too -->
+            <!-- by calling the block's names {{ title() }} <= this is the correct syntax we can import the same code written for title block in child component for this div tag too -->
             {# Since using same blocked names in a single html file is not
             allowed #}
           </a>
           <button
-            class="navbar-toggler" 
+            class="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarToggle"
             aria-controls="navbarToggle"
-            aria-expanded="false" 
+            aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            {# Here the type attribute that the button has is standard in html and has many possible values like submit, checkbox, radio, etc. #}
-            {# These different values of type attribute can help us to make certain funcrion of the button clear for semantics, for enhanced user experience #}
-            {# data-toggle = collapse se the content for the target collapses #}
-            {# aria-controls is for accesibility and semantics and describe which element is getting controlled by this button for the accesibility softwares, the render engine doesn't want knowledge what it does control since it already knows this #}
-            {# aria expanded is default expansion value, and label is for text for screen readers #}
-            <span class="navbar-toggler-icon"></span>
+            {# Here the type attribute that the button has is standard in html
+            and has many possible values like submit, checkbox, radio, etc. #}
+            {# These different values of type attribute can help us to make
+            certain funcrion of the button clear for semantics, for enhanced
+            user experience #} {# data-toggle = collapse se the content for the
+            target collapses #} {# aria-controls is for accesibility and
+            semantics and describe which element is getting controlled by this
+            button for the accesibility softwares, the render engine doesn't
+            want knowledge what it does control since it already knows this #}
+            {# aria expanded is default expansion value, and label is for text
+            for screen readers #}
+            <span class="navbar-toggler-icon"></span> {# hamburger icon #}
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="/">Home</a>
-              <a class="nav-item nav-link" href="/about">About</a>
+              <a class="nav-item nav-link" href="/">Home</a> {# nav links inside the navbar-nav #}
+              <a class="nav-item nav-link" href="/about">About</a> {# nav-item or nav-link the same #}
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -61,13 +76,14 @@
       </nav>
     </header>
     <main>
-      {% block content-main %} {# content-of-the-web-page #} {% endblock
-      content-main %}
+      {% block content-main %} 
+      {# content-of-the-web-page #} 
+      {% endblock content-main %}
     </main>
     <footer>
-      {% block content-footer %} {#
-      content's-footer-and-also-include-address-tag-for-semantics #} {% endblock
-      content-footer %}
+      {% block content-footer %} 
+      {# content's-footer-and-also-include-address-tag-for-semantics #} 
+      {% endblock content-footer %}
     </footer>
     {# It is generally a good practice to include the name of the block in the
     enblock statement #} {# we can even add some content here only which is
