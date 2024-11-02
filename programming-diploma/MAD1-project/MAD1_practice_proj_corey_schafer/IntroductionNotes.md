@@ -54,3 +54,4 @@ run this command in the directory in which we want to install the virtual enviro
 - We're using bootstrap to style our website which is developed using flask, and we'll use cdn to link our css files
 - So like cdn which is content delivery network which hosts remote files on their server and when we link these files directly in our html file then our html files extracts the styles and remote js from the server
 - So like there's a drawback to this approach since we're depending on some external package for our code
+- also make sure to use _ instead of hyphens since it is not allowed in naming blocks in jinja template system

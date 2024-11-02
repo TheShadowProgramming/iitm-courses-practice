@@ -84,3 +84,20 @@
     </div>
   </nav>
 </header>
+
+# Bootstrap utility classess
+
+- in bootstrap, browser applies some bootstrap styling to different element in the web page
+- heading with display class gives a bigger heading and non-bold letters instead of the h1 to h6 class which makes the text bold
+- any tag with the class will look same
+- p with class lead will look slightly bigger than the regular p tag, can be used to start the articles to draw attention
+- there are default colors in bootstrap present and therefore we have to customize the colors in the bootstrap to get rid of the default color scheme which is primary (blue), secondary (grey), danger (red), warning (yellow), muted(slightly transparent anad grayish)
+- button group class makes sure that the buttons are sticked together, like there is no whitespace between them 
+- ms and ps means left like margin and padding start they mean 
+and similarly me and pe means right like margin and padding end they mean 
+- first specify border class then edit the border class, like border-top gives border only to the top of the element, similarly border-bottom gives the border only to the bottom part of the element  
+- poore bootstrap me kisi bhi chij ko color dena hai to wahi gine chune colors available hai like the primary one, secondary one and etc
+- border-any number and that's how you give the border some strength to it 
+- rounded-full in taiwind is similar to rounded-pill in bootstrap and rounded likhne se chota sa round ho jaata hai border and the entire element itself
+- shadow-sm, shadow-lg se the box looks like uska z-index is raised and uska box shadow aajaata hai in bootstrap
+- read the bootstrap grid docs, its pretty useful and also grid system ke liye responsive breakpoints bhi hai ki small screen pe this happen, large screen pe that happens  

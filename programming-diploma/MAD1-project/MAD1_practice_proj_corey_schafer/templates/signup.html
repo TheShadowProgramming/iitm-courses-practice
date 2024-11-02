@@ -1,0 +1,43 @@
+{% extends './base.html' %} 
+
+{% block cssFile %}
+<link rel="stylesheet" href="../static/signup.css" />
+{% endblock cssFile %} 
+
+{% block content_main %}
+<form action="" method="POST" target="_self" autocomplete="off">
+  <fieldset>
+    <legend>Sign Up</legend>
+    <div class="mb-3">
+        <!-- the syntax to pass multiple attributes in the forms created using the wtforms package -->
+        {{form.email.label(class="form-label", id="someId")}} 
+        {{form.email(class="form-control form-control-lg", name="email", aria-describedby="emailHelp")}}
+        <!-- <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        aria-describedby="emailHelp"
+      /> -->
+    </div>
+    <div class="mb-3">
+        {{form.username.label(class="form-label")}} 
+        {{form.username(class="form-control form-control-lg", name="username")}}
+    </div>
+    <div class="mb-3">
+        {{form.password.label(class="form-label")}} 
+        {{form.password(class="form-control form-control-lg", name="password")}}
+    </div>
+    <div class="mb-3">
+        {{form.confirmPassword.label(class="form-label")}} 
+        {{form.confirmPassword(class="form-control form-control-lg", name="confirmPassword")}}
+    </div>
+  </fieldset>
+  {{form.submit(class="btn btn-outline-info")}}
+  <!-- button outline info likhne se the button has only color in the border only -->
+</form>
+{% endblock content_main %} 
+
+{% block content_footer %} 
+
+{% endblock content_footer %}
