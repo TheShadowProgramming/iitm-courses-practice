@@ -1,7 +1,6 @@
-from flask import Flask; # type: ignore
+from flask import Flask, render_template, redirect, url_for, flash; # type: ignore
 # some error with importing flask, will see later
 from markupsafe import escape; # type: ignore
-from flask import render_template;
 from forms import RegistrationForm, LoginForm;
 
 app = Flask(__name__);
@@ -29,7 +28,7 @@ posts = [
 
 @app.route("/")
 def home():
-    return render_template('home.html', title='Home') # here title is the prop that we're passing in the template
+    return render_template('home.html', title='Home', posts=posts) # here title is the prop that we're passing in the template
 
 @app.route("/login")
 def login():
@@ -39,6 +38,9 @@ def login():
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Welcome to Flask Blog {form.username.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('signup.html', title="SignUp", form=form)
 
 

@@ -15,7 +15,3 @@ def hello(name):
 # Using variables in return statement
 
 - we can even convert the variables in the url into certain data type before using it, more about these converters in the docs of the flask framework 
-
-# Jinja2 Template engine
-
--

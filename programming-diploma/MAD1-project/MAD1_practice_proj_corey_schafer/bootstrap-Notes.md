@@ -100,4 +100,8 @@ and similarly me and pe means right like margin and padding end they mean
 - border-any number and that's how you give the border some strength to it 
 - rounded-full in taiwind is similar to rounded-pill in bootstrap and rounded likhne se chota sa round ho jaata hai border and the entire element itself
 - shadow-sm, shadow-lg se the box looks like uska z-index is raised and uska box shadow aajaata hai in bootstrap
-- read the bootstrap grid docs, its pretty useful and also grid system ke liye responsive breakpoints bhi hai ki small screen pe this happen, large screen pe that happens  
+- read the bootstrap grid docs, its pretty useful and also grid system ke liye responsive breakpoints bhi hai ki small screen pe this happen, large screen pe that happens
+
+# Cards
+
+- Card class dena padta to main parent div container and then the children divs inside the can get card image, card title, card sub-title, card text, and then card link type of classes  

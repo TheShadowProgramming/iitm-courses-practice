@@ -38,10 +38,12 @@ run this command in the directory in which we want to install the virtual enviro
 
 - In jinja we can write variables inside {{}} and statements like if, for loops and stuff in {%%} blocks 
 - and for comments we use this {##}, renaming the template html files into .html.jinja will help the IDEs classify them better 
+- when we're returning some template under some route in the main app.py file then the template need not to remain in the root location of the templates directory, it can also stay in the nested folder structures too 
 - every code block has to be mandatorily closed like endif, endfor, endblock etc.
 
 # Template Inheritance and url_for method 
 
+- url_for method me simply first arguement daalo the folder and then the file name ko cater karne wala view function like the function which returns the template that you want to render on the screen (automatically vo url generate kar dega), and also this method is specific to flask so we have use jinja syntax for using this method
 - So like yea flask or jinja is not like react where we're having single page website and then everything is getting manipulated using virtual DOM and stuff
 - In flask like frameworks we send separate html files for every request and path that exists on the website, and as a result we have to write the html boilerplate code everytime we create some new jinja template
 - Now the thing is we can create some layouts and then use "block" keywords where new code will be added when we write "extends name_of_parent.html" at the top of our child html file 
@@ -54,4 +56,19 @@ run this command in the directory in which we want to install the virtual enviro
 - We're using bootstrap to style our website which is developed using flask, and we'll use cdn to link our css files
 - So like cdn which is content delivery network which hosts remote files on their server and when we link these files directly in our html file then our html files extracts the styles and remote js from the server
 - So like there's a drawback to this approach since we're depending on some external package for our code
-- also make sure to use _ instead of hyphens since it is not allowed in naming blocks in jinja template system
+- also make sure to use _ instead of hyphens since it is not allowed in naming blocks in jinja template system, using hyphens in the attributes passed through the wt_Forms package is also not allowed in jinja template system 
+- form.csrf_token is more specific that it'll send only the csrf_token and the form.hidden_tag will send the entire hidden info of the request
+- url_for method generates the url for the function serving the different routes that we build for the web app like it doesn't builds the routes for the template files, this is true for the regular route functions in the root directory
+- but for accessing the files inside the static folder we actually pass the file name using the filename attribute of the url_for method
+
+# Flask redirection and other special methods
+
+- redirect method me insert the url_for method by generating the location of the file and obviously this function makes sure any code written below it doesn't runs 
+- flash message used in the redirection process stores the message that has passed into it in the first argument and also stores some meta data about the flash message in the 2nd argument named category, and also the main function of the flash message is that the flash message will only store the data until the next request to the same route for which the flash message has been defined upon
+- and remember flash message has to be retrieved in the template where we want the flash message, and flash message stores the info until the next request from the user is not sent to any route of the web app 
+- form.anyField.data gives the data given by the user
+- the submitField created using the wt_forms package runs the view function's code again when the user presses the button
+
+# Flask Components
+
+- we can use {% include 'path/filename.html' %} to include other components/macros in flask just like react and it works just like react like then html inside the filename.html it directly rendered wherever we call the {% include part %}
