@@ -7,8 +7,9 @@
 for venv :- 
 
 run this command in the directory in which we want to install the virtual environment
-- python3 -m venv .venv
-- . .venv/bin/activate (for activating the virtual environment)
+- pip install virtualenv (virtual env create karne ke liye package)
+- python3 -m virtualenv .venv/any_other_folder_name_of_the_virtual_env
+- . name_of_the_virtual_env_folder_created/bin/activate (for activating the virtual environment)
 - deactivate karne ke liye, just the deactivate keyword
 
 # Thing about the virtual environment
@@ -58,6 +59,8 @@ run this command in the directory in which we want to install the virtual enviro
 - So like there's a drawback to this approach since we're depending on some external package for our code
 - also make sure to use _ instead of hyphens since it is not allowed in naming blocks in jinja template system, using hyphens in the attributes passed through the wt_Forms package is also not allowed in jinja template system 
 - form.csrf_token is more specific that it'll send only the csrf_token and the form.hidden_tag will send the entire hidden info of the request
+- Remember that the CSRF token is generated at the moment when the page loads for which we included a form.hidden_Tag, generation of this token is dependant on the secret_key passed in the app.py file and when the malicious user sends the request to the route for which the CSRF token is required, backend responds with a bad request 
+- and then the CSRF token passed with the form is authenticated with the CSRF token generated in the backend for the form 
 - url_for method generates the url for the function serving the different routes that we build for the web app like it doesn't builds the routes for the template files, this is true for the regular route functions in the root directory
 - but for accessing the files inside the static folder we actually pass the file name using the filename attribute of the url_for method
 
@@ -69,6 +72,8 @@ run this command in the directory in which we want to install the virtual enviro
 - form.anyField.data gives the data given by the user
 - the submitField created using the wt_forms package runs the view function's code again when the user presses the button
 
-# Flask Components
+# Flask Components and macros, and re-renders of the templates
 
 - we can use {% include 'path/filename.html' %} to include other components/macros in flask just like react and it works just like react like then html inside the filename.html it directly rendered wherever we call the {% include part %}
+- this include syntax doesn't support the props syntax so we use the macros syntax to pass props along with rendering the templates, so to like create a re-usable template or component
+- jinja templates are executed on the server side and then sent to the client requesting the html file, so the template code only runs whenever the user does the request again to the same route 

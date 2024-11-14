@@ -1,0 +1,26 @@
+{% extends './base.html' %}
+
+{% block cssFile %}
+    <link rel="stylesheet" href="url_for('static', filename='home.css')">
+{% endblock cssFile %}
+
+{% block additional_head_tag_content %}
+    
+{% endblock additional_head_tag_content %}
+
+{% block content_main %}
+    {% from './macros/blog_card.html' import render_blog %}
+
+    <div class="container d-flex flex-column">
+        <div class="">
+            {% for post in posts %}
+                {{ render_blog(title=post.title, date_posted=post.date_posted, content=post.content, author=post.author) }}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content_main %}
+
+{% block content_footer %}
+    
+{% endblock content_footer %}

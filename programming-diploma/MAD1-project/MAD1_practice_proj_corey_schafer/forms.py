@@ -9,11 +9,11 @@ from wtforms.validators import Length, DataRequired, Email, EqualTo; # type: ign
 # submitField is also different from the passwordField, maybe it'll return  
 # EqualTo validator me jo bhi variable pass karenge uske equal hoga apna existing variable
 
-class RegistrationForm(FlaskForm):
+class signupForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=30)])
-    confirmPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo(password)])
+    confirmPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submitButton = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):

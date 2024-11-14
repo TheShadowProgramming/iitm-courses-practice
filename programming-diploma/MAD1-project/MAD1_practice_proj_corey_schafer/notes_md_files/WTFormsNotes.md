@@ -6,6 +6,8 @@
 
 - pip install -U FLask-WTF --break-system-packages (this is the command to install the Flask_WTF integration)
 
+- pip install email_validator --break-system-packages (this command to install the email_validator package used for the email_validator function under the hood for the Email())
+
 # Basic Syntax 
 
 - It is present in the forms.py file and like remember that Flask_wtf ka syntax is different than the wtforms ka syntax and we're using the flask_wtf syntax
@@ -19,3 +21,7 @@
 # Secret_Key generation
 
 - python3 in the CLI, then importing secrets module of the python package, then secrets.token_hex(16) to get a token of 16 characters
+
+# Error handling in the wt_Forms 
+
+- so like whenever user inputs the forms with some credentials then the form may throw some error which we can access using the form.form_component.errors attribute and then we can loop over it and make the form component have the style that the user has done some error by using the is-invalid bootstrap class 

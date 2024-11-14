@@ -34,7 +34,7 @@
       <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: hsla(152, 84%, 39%, 0.932);">
         <div class="container">
             <!-- Left side - Brand -->
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
                 Flask Blog
             </a>
             
@@ -55,16 +55,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarToggle">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/">Home</a>
+                        <a class="nav-link text-dark" href="{{url_for('home')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/about">About</a>
+                        <a class="nav-link text-dark" href="{{ url_for('about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/login">Login</a>
+                        <a class="nav-link text-dark" href="{{ url_for('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/signup">Register</a>
+                        <a class="nav-link text-dark" href="{{ url_for('signup') }}">Signup</a>
                     </li>
                 </ul>
             </div>
@@ -72,9 +72,20 @@
     </nav>
     </header>
     <main class="mt-5">
-      {% block content_main %} 
-      {# content-of-the-web-page #} 
-      {% endblock content_main %}
+        <div class="container-sm d-flex mt-3">
+          {% with messages = get_flashed_messages(with_categories=True)  %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="bg-success mt-3 mb-0 text-warning w-25 alert alert-{{ category }}">
+                    {{ message }}
+                </div>    
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+        {% block content_main %} 
+        {# content-of-the-web-page #} 
+        {% endblock content_main %}  
     </main>
     <footer>
       {% block content_footer %} 
