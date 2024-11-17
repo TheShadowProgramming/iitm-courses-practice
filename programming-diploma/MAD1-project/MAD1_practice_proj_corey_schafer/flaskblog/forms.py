@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm;  # type: ignore
 from wtforms import StringField, PasswordField, SubmitField, BooleanField; # type: ignore
-from wtforms.validators import Length, DataRequired, Email, EqualTo; # type: ignore
+from wtforms.validators import Length, DataRequired, Email, EqualTo, ValidationError; # type: ignore
+from flaskblog.models import User;
 
 # StringField defines the type of the input, type checking for debugging
 # validators make sure that the input follows the rules present inside the array of the validators
@@ -15,6 +16,13 @@ class signupForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=30)])
     confirmPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submitButton = SubmitField('Sign Up')
+
+    def validate_username(self, username):
+        
+        user = User.query.filter_by(username=username.data).first()
+
+        if user:
+            raise ValidationError('User with the given username already exists')
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

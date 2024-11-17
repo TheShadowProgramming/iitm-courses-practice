@@ -31,6 +31,7 @@ run this command in the directory in which we want to install the virtual enviro
 - flask --app "name-of-the-flask-app" run
 - to enter debug mode we use this command "flask --app hello run --debug" [hello ke jagah pe you use the name of the flask app file]
 - or even we can make environment variables which will store the info whether to enter the debug mode or not while running the server, this method is prefered since the debugger mode/development mode allows the user to manipulate the code from the browser itself 
+- if we want to modify the code from the browser itself then we can use the debugger pin present in the terminal and enter that pin in the browser to change the code from the browser itself
 - To make sure to not push the updates to production before turning off the debugger mode
 - we can even set environment variables like export FLASK_APP=app.py (in the directory of app.py ofc)
 - In this way flask understands by itself, like jo .env file me bhi store kar sakte and like iss tarah se bhi in built package environment variables ko bhi set kar sakte hai

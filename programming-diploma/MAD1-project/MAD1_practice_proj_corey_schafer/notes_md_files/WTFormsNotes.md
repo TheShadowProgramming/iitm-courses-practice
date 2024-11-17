@@ -24,4 +24,14 @@
 
 # Error handling in the wt_Forms 
 
-- so like whenever user inputs the forms with some credentials then the form may throw some error which we can access using the form.form_component.errors attribute and then we can loop over it and make the form component have the style that the user has done some error by using the is-invalid bootstrap class 
+- so like whenever user inputs the forms with some credentials then the form may throw some error which we can access using the form.form_component.errors attribute and then we can loop over it and make the form component have the style that the user has done some error by using the is-invalid bootstrap class
+
+# Custom validation of the forms 
+
+- so we can introduce custom validation for our form fields too, use cases are like whether the user is already logged in or not
+- we can check whether the data entered by the user is already present in the database or not and then accordingly pass the validtion or not 
+- if we raise ValidationError('custom_message_here'), where the ValidationError() method is one of the validators of the wtforms package, makes sense why is it a validator
+- then the error message that we passed in the ValidationError() method is dealt with in the signup.html and login.html jaha pe we have made custom bootstrap elements for handling this
+
+- so the validate_on_submit() method invokes all the validator methods present in the flask Form
+- and also invokes the function of the format validate_<field_name>(self, <field_name>) which we define inside the class, like we don't need to call it seperately, flask-wtf calls the methods of these formats by itself when we call the validate_on_submit()

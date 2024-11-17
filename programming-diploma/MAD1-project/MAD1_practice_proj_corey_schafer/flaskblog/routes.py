@@ -1,26 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, flash; # type: ignore
-# some error with importing flask, will see later
-# from markupsafe import escape; # type: ignore
-from flask_sqlalchemy import SQLAlchemy # type: ignore
-from sqlalchemy.orm import Mapped, mapped_column;  # type: ignore
-from forms import signupForm, LoginForm;
-
-app = Flask(__name__);
-
-# App.config se we access the environment variables
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db';
-app.config['DEBUG'] = True;
-app.config['SECRET_KEY'] = '75b7604b399240a54b9c44c51868ff34';
-
-db = SQLAlchemy(app)
-
-class User(db.Model):
-    id: Mapped['int'] = mapped_column(primary_key=True)
-    username: Mapped['str'] = mapped_column(db.String(20), nullable=False, unique=True)
-    email: Mapped['str'] = mapped_column(db.String(120), nullable=False, unique=True)
-    password: Mapped['str'] = mapped_column(db.String(20), nullable=False)
-    posts: 
+from flask import render_template, redirect, url_for, flash; # type: ignore
+from flaskblog.forms import signupForm, LoginForm;
+from flaskblog.models import User, Post;
+from flaskblog import app, db, flask_bcrypt;
 
 posts = [
     {
@@ -58,8 +39,17 @@ def login():
 def signup():
     form = signupForm()
     if form.validate_on_submit():
-        flash(f'Welcome to Flask Blog {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+
+        hashed_pw = flask_bcrypt.generate_password_hash(form.password.data).decode('utf-8'); # we can even directly pass the function in the password of the new_user without creating the variable here
+
+        new_user = User(username=form.username.data, email=form.email.data, password=hashed_pw)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash(f'Successfully created a user, now you can login in', 'success')
+        return redirect(url_for('login'))
+    
     return render_template('routes/signup.html', title="SignUp", form=form) # iss tarah se render_template method me first argument me folder ke naam ke saath file name dena padega
 
 @app.route('/about', methods=['GET'])
@@ -71,5 +61,3 @@ def about():
 # def hello_world(name): # function ke argument me query parameters of path must be passed
 #     return f'Hello {escape(name)}'; # making sure that name variable is considered string only, this is automatically done by the jinja2 templating engine
 
-if __name__ == "__main__":
-    app.run()
