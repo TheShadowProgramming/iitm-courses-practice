@@ -16,3 +16,5 @@
 - Send AJAX requests for more data
 - Append new "components" to the DOM
 - find out why the extends me the route is working
+
+- !Important :- make sure that the hashed_password is only password field, and the password field is removed from the database once in production

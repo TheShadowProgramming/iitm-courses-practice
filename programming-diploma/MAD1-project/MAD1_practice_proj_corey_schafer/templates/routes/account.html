@@ -1,0 +1,84 @@
+{% extends './base.html' %}
+
+{% block cssFile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock cssFile %}
+
+{% block additional_head_tag_content %}
+    
+{% endblock additional_head_tag_content %}
+
+{% block content_main %}
+    <div style="width: 30%;" class="media mt-4 ms-2 d-flex justify-content-between">
+        <img style="width: 4rem; height:4rem;" class="rounded-circle mt-1" src="{{ image_file_path }}" alt="">
+        <div class="media-body">
+            <h1 class="text-primary">
+                {{ current_user.username }}
+            </h1>
+            <p class="text-secondary">
+                {{ current_user.email }}
+            </p>
+        </div>
+    </div>
+    <form class="" action="" method="POST" target="_self" autocomplete="off">
+        {{ form.hidden_tag() }} 
+        <fieldset>
+          <div class="container-sm text-white mt-3">
+            <legend>Account Info</legend>
+          </div>
+          <div class="container-sm mb-3">
+            <div class="col-8">
+              <!-- the syntax to pass multiple attributes in the forms created using the wtforms package -->
+      
+              {{ form.email.label(class="form-label text-light", id="someId") }} 
+      
+              {% if form.email.errors %}
+                {{form.email(class="form-control bg-dark text-light border-light form-control-lg is-invalid")}}          
+              {% else %}
+                {{ form.email(class="form-control bg-dark text-light border-light form-control-lg", **{'aria-describedby': "emailHelp"}) }}          
+              {% endif %}
+              
+              {% for error in form.email.errors %}
+                <div class="invalid-feedback">
+                  {{ error }}
+                </div>
+              {% endfor %}
+              <!-- syntax to pass attributes with hyphens in flask wt_Forms package since jinja doesn't allows to have hyphens in it -->
+              <!-- <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              aria-describedby="emailHelp"
+            /> -->
+            </div>
+          </div>
+          <div class="container-sm mb-3">
+            <div class="col-8">
+              {{ form.username.label(class="form-label text-light") }}
+      
+              {% if form.username.errors %}
+                {{form.username(class="form-control bg-dark text-light border-light form-control-lg is-invalid")}}          
+              {% else %}
+                {{ form.username(class="form-control bg-dark text-light border-light form-control-lg", **{'aria-describedby': "emailHelp"}) }}          
+              {% endif %}
+              
+              {% for error in form.username.errors %}
+                <div class="invalid-feedback">
+                  {{ error }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </fieldset>
+        <div class="container-sm">
+          {{ form.submitButton(class="btn btn-outline-info") }}
+          <!-- button outline info likhne se the button has only color in the border only -->
+        </div>
+    </form>
+      
+{% endblock content_main %}
+
+{% block content_footer %}
+    
+{% endblock content_footer %}

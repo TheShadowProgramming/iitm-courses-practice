@@ -17,6 +17,24 @@ run this command in the directory in which we want to install the virtual enviro
 - virtual environments are created so that projects having different versions of python don't interfere with each other
 - like if we do changes in python version then it may break the projects having different versions of python
 
+# Decorator functions 
+
+- decorator functions are defined in a way to make sure that they accept the function as an input over which they are called using the @ syntax
+- and then function defined inside the decorator runs whenever we call the outer function over which the decorater is defined
+
+def decorator_function(function):
+    def function2:
+        return (var2 + function())
+    
+    return function2
+
+@decorator_function
+def function1():
+    return var1
+
+function1() # supposed output is var1 and var2
+
+- common use case is when we want to add some common change to all the functions present in the application then we can use the decorator which modifies the original function consistently
 
 # Class based approach of the flask application
 - we create application using Flask Class only
@@ -69,6 +87,7 @@ run this command in the directory in which we want to install the virtual enviro
 
 - redirect method me insert the url_for method by generating the location of the file and obviously this function makes sure any code written below it doesn't runs 
 - flash message used in the redirection process stores the message that has passed into it in the first argument and also stores some meta data about the flash message in the 2nd argument named category, and also the main function of the flash message is that the flash message will only store the data until the next request to the same route for which the flash message has been defined upon
+- since the flash message works between requests and uses sessions module under the hood, therefore we need secret_key to make sure that user doesn't plays with the session
 - and remember flash message has to be retrieved in the template where we want the flash message, and flash message stores the info until the next request from the user is not sent to any route of the web app 
 - form.anyField.data gives the data given by the user
 - the submitField created using the wt_forms package runs the view function's code again when the user presses the button

@@ -1,22 +1,25 @@
 from datetime import datetime, timezone;  # type: ignore
 from sqlalchemy.orm import Mapped, mapped_column, relationship; # type: ignore
 from flaskblog import db;
+from flask_login import UserMixin; # type: ignore
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id: Mapped['int'] = mapped_column(primary_key=True)
     
     username: Mapped['str'] = mapped_column(db.String(20), nullable=False, unique=True)
     
     email: Mapped['str'] = mapped_column(db.String(120), nullable=False, unique=True)
     
-    password: Mapped['str'] = mapped_column(db.String(20), nullable=False)
+    hashed_password: Mapped['str'] = mapped_column(db.String(20), nullable=False) # this is just for development and debugging puporse, it'll be removed once we push it to production and also the routes.py will be edited jisme we've assumed that the 
     
-    image_file_path: Mapped['str'] = mapped_column(db.Text, nullable=False, default='default.jpg')
+    password: Mapped['str'] = mapped_column(db.String(20), nullable=False)
+
+    image_file_name: Mapped['str'] = mapped_column(db.Text, nullable=False, default='default.jpg')
 
     posts: Mapped[list['Post']] = relationship(backref='author', lazy=True)
 
     def __repr__(self):
-        return f'{self.username}, {self.id}, {self.image_file_path}'
+        return f'{self.username}, {self.id}, {self.image_file_name}'
 
 class Post(db.Model):
     id: Mapped['int'] = mapped_column(primary_key=True)
@@ -31,3 +34,4 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'{self.post_title}, {self.date_posted}, {self.id}'
+  
