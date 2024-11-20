@@ -1,3 +1,6 @@
+import secrets;
+import os;
+from PIL import Image; # type: ignore
 from flask import render_template, redirect, url_for, flash, request; # type: ignore
 from flaskblog.forms import signupForm, LoginForm, AccountUpdateForm;
 from flaskblog.models import User, Post;
@@ -85,14 +88,35 @@ def logout():
     logout_user() # don't need to pass anything in the logout_user function just the current user gets logged out by clearing the cookies present in the user's browser 
     return redirect(url_for('home'))
 
+def save_picture_and_return_picture_file_name(picture_file):
+    picture_file_extension = os.path.splitext(picture_file.filename)[1]; # this method splitext helps in seperating the file extension, where the first part is the name of the file
+    random_hex_code_for_picture_filename = secrets.token_hex(8); # this variable name will be stored in the database instead of the file_name given by the user to avoid duplication and malware integration in the database
+    new_hex_code_filename = random_hex_code_for_picture_filename + picture_file_extension
+    picture_file_path_to_save_it = os.path.join(app.root_path, 'static/profile_pictures', new_hex_code_filename)
+
+    output_size = (125, 150)
+    i = Image.open(picture_file)
+    i.thumbnail(output_size)
+
+    i.save(picture_file_path_to_save_it)
+
+    return new_hex_code_filename;
+    # TL;DR :- we gave random hex code name to the file and saved it using the FileField data that we got  
+
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
     form = AccountUpdateForm();
 
     if form.validate_on_submit():
+        if form.picture_file.data:
+            
+            picture_fn = save_picture_and_return_picture_file_name(form.picture_file.data);
+
+            current_user.image_file_name = picture_fn;
+        
         current_user.email = form.email.data;
-        current_user.username = form.username.data
+        current_user.username = form.username.data;
         db.session.commit()
         flash('Account Info has been updated', 'info')
         return redirect(url_for('account')) # once the form is submitted through POST request then we need to make sure that the latest request becomes GET, therefore we deliberately shift the user to the same route with GET request with another request so as to change the state variables, or else when the user refreshes then the POST request is sent to the same route which duplicates the content

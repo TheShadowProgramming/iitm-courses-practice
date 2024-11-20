@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy # type: ignore
 from flask_bcrypt import Bcrypt; # type: ignore
 from flask_login import LoginManager; # type: ignore
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__, template_folder='./templates', static_folder='./static')
 
 # App.config se we access the environment variables
 
