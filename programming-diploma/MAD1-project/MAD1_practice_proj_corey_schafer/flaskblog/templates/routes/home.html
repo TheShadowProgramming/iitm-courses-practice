@@ -14,7 +14,7 @@
     <div class="container d-flex flex-column">
         <div class="">
             {% for post in posts %}
-                {{ render_blog(title=post.title, date_posted=post.date_posted, content=post.content, author=post.author) }}
+                {{ render_blog(title=post.post_title, date_posted=post.date_posted, content=post.post_content, author=post.author) }}
             {% endfor %}
         </div>
     </div>

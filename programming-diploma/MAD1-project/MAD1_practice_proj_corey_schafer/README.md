@@ -18,3 +18,5 @@
 - find out why the extends me the route is working
 
 - !Important :- make sure that the hashed_password is only password field, and the password field is removed from the database once in production
+
+- !Important :- If in future, if we go in production then we'll think of some method to deal with the precaution to make sure that the uploaded by the user is not harmful for the database and in general the website like they can upload injected html and can manipulate the website using script tags

@@ -6,3 +6,8 @@
 - then we resize using the thumbnail method :- 
 i.thumbnail(output_size)
 i.save(picture_path)
+
+# Displaying custom parts of datetime on the screen according to our wish
+
+- use the method strftime('%Y-%m-%d'), this method will only display the year, month and the date of the datetime object jispe you're using the method
+- we can look online for more tricks to check how to load the datetime object

@@ -2,33 +2,14 @@ import secrets;
 import os;
 from PIL import Image; # type: ignore
 from flask import render_template, redirect, url_for, flash, request; # type: ignore
-from flaskblog.forms import signupForm, LoginForm, AccountUpdateForm;
+from flaskblog.forms import signupForm, LoginForm, AccountUpdateForm, PostForm;
 from flaskblog.models import User, Post;
-from flaskblog import app, db, flask_bcrypt_instance, login_manager;
+from flaskblog import app, db, flask_bcrypt_instance;
 from flask_login import login_user, logout_user, current_user, login_required; # type: ignore
-
-@login_manager.user_loader
-def retrieve_user(user_id):
-    return User.query.filter_by(id=user_id).first()
-
-posts = [
-    {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First Post Content',
-        'date_posted': 'October 20 2024'
-    },
-    {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second Post Content',
-        'date_posted': 'October 21 2024',
-    }
-]
-
 
 @app.route("/")
 def home():
+    posts = Post.query.all();
     return render_template('routes/home.html', title='Home', posts=posts, current_user=current_user) # here title is the prop that we're passing in the template
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -80,7 +61,7 @@ def signup():
 
 @app.route('/about', methods=['GET'])
 def about_us():
-    return render_template('routes/about.html', current_user=current_user)
+    return render_template('routes/about.html', title="About", current_user=current_user)
 
 
 @app.route('/logout', methods=['GET'])
@@ -94,7 +75,7 @@ def save_picture_and_return_picture_file_name(picture_file):
     new_hex_code_filename = random_hex_code_for_picture_filename + picture_file_extension
     picture_file_path_to_save_it = os.path.join(app.root_path, 'static/profile_pictures', new_hex_code_filename)
 
-    output_size = (125, 150)
+    output_size = (80, 96)
     i = Image.open(picture_file)
     i.thumbnail(output_size)
 
@@ -126,7 +107,32 @@ def account():
         form.username.data = current_user.username
 
     image_file_path = url_for('static', filename=f'profile_pictures/{current_user.image_file_name}')
-    return render_template('routes/account.html', current_user=current_user, image_file_path=image_file_path, form=form)
+    return render_template('routes/account.html', title="My Account", current_user=current_user, image_file_path=image_file_path, form=form)
+
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def post():
+
+    form = PostForm()
+    if form.validate_on_submit():
+
+        post_title = form.post_title.data;
+        post_content = form.post_content.data;
+
+        post = Post(post_title=post_title, post_content=post_content, user_id=current_user.id)
+
+        db.session.add(post)
+        db.session.commit()
+
+        flash('Your Post has been created', 'info')
+        return redirect(url_for('home'))
+    return render_template('routes/post.html', title='New Post', current_user=current_user, form=form)
+
+@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def update_post():
+    return render_template('routes/update_post.html', title='Update Post')
 
 # @app.route("/checking-escape/<string:name>") # In this way, we can add multiple routes where we want the same function to respond with , <> me string converter hai jiske wajah se the input provided by the user is converted into a string automatically
 # def hello_world(name): # function ke argument me query parameters of path must be passed

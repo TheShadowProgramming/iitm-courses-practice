@@ -1,7 +1,11 @@
 from datetime import datetime, timezone;  # type: ignore
 from sqlalchemy.orm import Mapped, mapped_column, relationship; # type: ignore
-from flaskblog import db;
+from flaskblog import db, login_manager;
 from flask_login import UserMixin; # type: ignore
+
+@login_manager.user_loader
+def retrieve_user(user_id):
+    return User.query.filter_by(id=user_id).first()
 
 class User(db.Model, UserMixin):
     id: Mapped['int'] = mapped_column(primary_key=True)

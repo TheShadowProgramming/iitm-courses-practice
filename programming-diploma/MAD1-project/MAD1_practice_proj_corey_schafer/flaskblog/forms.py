@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm;  # type: ignore
 from flask_wtf.file import FileField, FileAllowed; # type: ignore
 from flask_login import current_user; # type: ignore
-from wtforms import StringField, PasswordField, SubmitField, BooleanField; # type: ignore
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField; # type: ignore
 from wtforms.validators import Length, DataRequired, Email, EqualTo, ValidationError; # type: ignore
 from flaskblog.models import User;
 
@@ -63,3 +63,16 @@ class AccountUpdateForm(FlaskForm):
 
             if user:
                 raise ValidationError('User with the given email already exists')
+            
+class PostForm(FlaskForm):
+    
+    post_title = StringField('Post Title', validators=[DataRequired()])
+    post_content = TextAreaField('Post Content Here', validators=[DataRequired()])
+
+    submitButton = SubmitField('Post')  
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+
+        if not user:
+            raise ValidationError("This email doesn't exists, please signup")
