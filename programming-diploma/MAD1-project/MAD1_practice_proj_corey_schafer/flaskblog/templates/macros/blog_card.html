@@ -4,7 +4,7 @@
             <div class="d-grid w-75">
                 <div class="row mb-3">
                     <img src="{{ url_for('static', filename='profile_pictures/' + author.image_file_name) }}" alt="" class="rounded-circle col-1" style="height: 5rem; width: 5rem;">
-                    <h5 class="card-title col-9"><a href="{{ url_for('') }}">>{{ title }}</a></h5>    
+                    <h5 class="card-title col-9"><a href="{{ url_for('home') }}">>{{ title }}</a></h5>    
                 </div>    
             </div>
             <h6 class="card-subtitle mb-2 border-2 border-bottom text-body-secondary">{{ date_posted }}</h6>

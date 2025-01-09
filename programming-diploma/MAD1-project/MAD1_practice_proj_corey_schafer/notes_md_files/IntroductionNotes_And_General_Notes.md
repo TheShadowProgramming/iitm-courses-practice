@@ -67,6 +67,7 @@ function1() # supposed output is var1 and var2
 - So like yea flask or jinja is not like react where we're having single page website and then everything is getting manipulated using virtual DOM and stuff
 - In flask like frameworks we send separate html files for every request and path that exists on the website, and as a result we have to write the html boilerplate code everytime we create some new jinja template
 - Now the thing is we can create some layouts and then use "block" keywords where new code will be added when we write "extends name_of_parent.html" at the top of our child html file 
+- extends ka naatak ye bhi hai ki usko templates directory me se hi select karna hai file ko jisko extend karega vo
 
 # Static folder and stuff + Template Inheritance
 
