@@ -1,5 +1,9 @@
 # WTForms Installation
 
+- if we don't want to use wt_forms then we can use request module too like request.form["name_attribute_value_of_form_elelement"]
+
+- like usko equate kardo to some variable and then pass it to the template
+
 - we gotta install the WTForms package in the virtual environment itself and make sure to use the flag when the installation is not happening properly
 
 - pip install flask-wtf --break-system-packages (in this way it gives some permission which I Don't know for now)

@@ -8,6 +8,8 @@
 
 # Sqlalchemy and flask_sqlalchemy 
 
+- if there are already created tables in databases then create classes of those tables kyuki orm is an object oriented interface to access the database 
+
 - so there's a native sql_Alchemy version for flask too which we'll be using in this project, and we could've used other libraries too like the main sqlalchemy library itself but yea we just want to get the job done as fast as possible so yea 
 - and if we're installing the flask-sqlalchemy package then the core of the sqlalchemy package is also installed with it which is necessary for the flask-sqlalchemy
 
