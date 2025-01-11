@@ -9,6 +9,7 @@
 # Sqlalchemy and flask_sqlalchemy 
 
 - if there are already created tables in databases then create classes of those tables kyuki orm is an object oriented interface to access the database 
+- unhi classes ke objects are the tuples of the tables of the database
 
 - so there's a native sql_Alchemy version for flask too which we'll be using in this project, and we could've used other libraries too like the main sqlalchemy library itself but yea we just want to get the job done as fast as possible so yea 
 - and if we're installing the flask-sqlalchemy package then the core of the sqlalchemy package is also installed with it which is necessary for the flask-sqlalchemy
@@ -29,6 +30,9 @@
 - there is one default property of every field I guess where we can pass the default value of some Column Attribute so like when the user doesn't passes any value in the field and if still the value is not-nullable so like the orm automatically give it that default value 
 - we also gotta pass foreign key in one of the models which are related and have attributes which retrieve data from the other table 
 - the mentioning of user.id in foreign key property of any field signifies that the user.id means that we're referencing some table named "user" instead of the class, and ye thoda ORM ke nature ke wajah se aisa hai ki ek jagah relationship banaate wakt they want capital letter and table mention karte wakt they want small letter
+
+- __tablename__ attribute of the table flask of sql alchemy helps us to name the table so that we can use that name in future for referencing foreign keys and stuff
+- 
 
 # Magic methods in python classess and some other packages inside python
 
