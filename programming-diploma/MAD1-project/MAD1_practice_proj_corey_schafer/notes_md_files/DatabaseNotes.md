@@ -32,7 +32,6 @@
 - the mentioning of user.id in foreign key property of any field signifies that the user.id means that we're referencing some table named "user" instead of the class, and ye thoda ORM ke nature ke wajah se aisa hai ki ek jagah relationship banaate wakt they want capital letter and table mention karte wakt they want small letter
 
 - __tablename__ attribute of the table flask of sql alchemy helps us to name the table so that we can use that name in future for referencing foreign keys and stuff
-- 
 
 # Magic methods in python classess and some other packages inside python
 
@@ -48,10 +47,68 @@
 - basically in simple terms db methods ko app context dena padega to operate
 - usi same app_context me import the classes, and just like we create objects of certain classes, we'll create rows using the class
 - create karne ke baad db.session.add() and then to commit changes to the database db.session.commit()
+- ye session object jo hota hai na vo important hai for batching all the updates in the buffer and it only executes the operations once we commit the changes
+- and it also manages to connect the database and deconnect when required and in this way the session object does other optimizations to make sure we get object oriented interface to interact with the database
+- there is some rollback object too in the sqlalchemy to manage transactions and errors 
+- we can do that using db.session.rollback()
 - specific class_name.query.all() to get all the rows of that table with schema present in the class
 - this .query after the class name says ki we're writing code which will be converted into sql query, and uss sql query ko complete karne ke liye we add the predicate clause present in the where part of the sql query and we pass filter_by() me ki iss attribute ka ye value hona chahiye
 - we can even store the output of these queries in an array and then individual members ke attributes ko access karne ke liye . notation ka use karna makes sense
 - user.query.get(any_primary_value) se we get the tuple with the primary_key_value equal to the number passed in the get method  
+
+# Creating one to one relationships in sqlalchemy
+
+Parent Class (): 
+    __tablename__ = "parent_table"
+    
+    parent_id: Mapped[int] = mapped_column(primary_key=true)
+    child_id: Mapped[int] = mapped_column(foreign_key="child_table.child_id")
+    child: Mapped[List('Parent')] = relationship(back_pupolates="parent")
+
+Child Class ():
+    __tablename__ = "child_table"leati
+
+    child_id: Mapped[int] = mapped_column(foreign_key=true)
+    parent: Mapped['Child'] = relationship(back_populates="child")
+
+- all in all ek foreign key ho, then 2 relationship banao dono relationship se pura dusre table ka tuple extract hota hai and usme back_populates ka value laga do
+
+# Secondary property of the relationship method in sqlalchemy for connecting relations with no foreign key
+
+- creating intermediate tables for relating 2 tables 
+    for example :- 
+        Author, Book Table share a relationship in the ER-diagram but they don't have a common foreign key between them
+
+    and let's say the ER diagram is something like this (many to many relationship)
+        ![ER diagram](image-1.png)
+
+    - then in this case we would want that relationship of Author Table should retreive tuple from the Post Table but they don't share foreign key, so we'll directly write something like this
+
+            Class Author():
+                __tablename__ = 'author'
+
+                author_id: Mapped[int] = mapped_column(primary_key=true)
+
+                author_name: Mapped(str) = mapped_column()
+
+                posts: Mapped(List('Post')) = relationship(back_populates='authors', secondary="writes")
+            
+            Class Writes():
+                __tablename__ = 'writes'
+
+                author_id: Mapped(int) = mapped_column(ForeignKey('author.author_id'))
+
+                post_id: Mapped(int) = mapped_column(ForeignKey(post.post_id))
+
+            Class Post():
+                __tablename__ = 'post'
+
+                post_id: Mapped(int) = mapped_column(primary_key=true)
+
+                post_content: Mapped(str) = mapped_column(db.Text)
+
+                authors: Mapped[List('Author')] = relationship(back_populates='posts', secondary='writes')
+
 
 # sqlite viewer
 
